@@ -1,6 +1,7 @@
 # HTTP GET/HEAD
 
 ## 1.1
+```
 $ telnet www.weer.nl 80
 Trying 52.49.153.133...
 Connected to b2cwebsite-live-lb-960116390.eu-west-1.elb.amazonaws.com.
@@ -38,8 +39,10 @@ X-Powered-By: PHP/5.5.26
 X-Varnish: 503252567 501706961
 transfer-encoding: chunked
 Connection: keep-alive
+```
 
 ## 1.2
+```
 $ telnet www.weer.nl 80|tee out.html
 Trying 52.19.144.82...
 Connected to b2cwebsite-live-lb-960116390.eu-west-1.elb.amazonaws.com.
@@ -61,6 +64,7 @@ X-Powered-By: PHP/5.5.26
 X-Varnish: 522669306 522669307
 transfer-encoding: chunked
 Connection: keep-alive
+```
 
 The content does not correspond entirely because there are no ads in the 
 downloaded version and the weather animation does not work.
