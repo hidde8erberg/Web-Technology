@@ -6,16 +6,20 @@ router.get("/", (req, res) => {
   res.render("splash");
 });
 
-router.get("/new_game", (req, res) => {
-  res.sendFile("game.html", {root: "./public"});
+router.get("/play", (req, res) => {
+  res.render("game");
 });
 
 router.get("/waiting", (req, res) => {
-  res.sendFile("waiting.html", {root: "./public"});
+  res.render("waiting")
+});
+
+router.get("/home", (req, res) => {
+  res.render("splash")
 });
 
 router.get("/clicked/:col", (req, res) => {
-
+  // TODO
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 var express = require("express");
+var websocket = require("ws");
 var http = require("http");
 var path = require('path');
 
@@ -12,7 +13,28 @@ var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
 app.use(express.static(__dirname + "/public"));
-http.createServer(app).listen(port);
+
+var server = http.createServer(app);
+
+const wss = new websocket.Server({ server });
+
+wss.on("connection", function(ws) {
+
+    //let's slow down the server response time a bit to make the change visible on the client side
+    setTimeout(function() {
+        console.log("Connection state: "+ ws.readyState);
+        ws.send("Thanks for the message. --Your server.");
+        ws.close();
+        console.log("Connection state: "+ ws.readyState);
+    }, 10000);
+    
+    ws.on("message", function incoming(message) {
+        console.log("[LOG] " + message);
+    });
+});
+
+
+server.listen(port);
 
 
 /*

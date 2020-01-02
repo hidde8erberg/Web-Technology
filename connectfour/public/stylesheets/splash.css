@@ -10,21 +10,21 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     margin-top: 150px;
     max-width: 60%;
     height: auto;
 }
-
+/*
 .title {
     text-align: center;
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
     font-size: 50pt;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     margin-top: 200px;
 }  
-
+*/
 .new_game_btn {
     width: 50%;
     margin: auto;
@@ -33,18 +33,25 @@ body {
 }
 
 .new_game {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
     border-radius: 4px;
     border-style: solid;
-    border-width: px;
+    border-width: 3px;
     border-color: #ffffff;
 
     color: #ffffff;
     font-style: normal; 
+    font-family: 'Rift Soft';
+    font-size: 40pt;
     text-decoration: none;
+}
+
+.new_game:hover {
+    background-color: white;
+    color: #282828;
 }
 
 .stats {
