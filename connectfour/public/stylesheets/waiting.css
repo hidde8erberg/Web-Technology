@@ -1,0 +1,27 @@
+body {
+    background-color: #282828;
+}
+
+.time {
+    font-family: 'Roboto Mono';
+    font-size: 100pt;
+    color: white;
+    text-align: center;
+}
+
+.time p {
+    margin-top: 15%;
+    margin-bottom: 0;
+}
+
+.info {
+    color: white;
+    font-family: 'Roboto Mono';
+    font-size: 20pt;
+    text-align: center;
+}
+
+.info p {
+    margin-top: 20px;
+    text-transform: uppercase;
+}

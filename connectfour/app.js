@@ -1,3 +1,21 @@
+var express = require("express");
+var http = require("http");
+var path = require('path');
+
+var port = process.argv[2];
+var app = express();
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+var indexRouter = require('./routes/index');
+app.use('/', indexRouter);
+
+app.use(express.static(__dirname + "/public"));
+http.createServer(app).listen(port);
+
+
+/*
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -39,3 +57,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+*/
