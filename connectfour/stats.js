@@ -3,3 +3,5 @@ let stats = {
     'currentMatches': 0,
     'totalMatches': 0
 };
+
+module.exports = stats;

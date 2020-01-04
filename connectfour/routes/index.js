@@ -1,9 +1,15 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+
+var stats = require("./../stats");
 
 router.get("/", (req, res) => {
   //res.sendFile("splash.html", {root: "./public"});
-  res.render("splash");
+  res.render("splash", {
+    players: stats.playersOnline,
+    ongoing: stats.currentMatches,
+    total: stats.totalMatches 
+  });
 });
 
 router.get("/play", (req, res) => {
@@ -11,11 +17,11 @@ router.get("/play", (req, res) => {
 });
 
 router.get("/waiting", (req, res) => {
-  res.render("waiting")
+  res.render("waiting");
 });
 
 router.get("/home", (req, res) => {
-  res.render("splash")
+  res.redirect("/");
 });
 
 router.get("/clicked/:col", (req, res) => {
