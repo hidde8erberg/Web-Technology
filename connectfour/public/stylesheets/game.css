@@ -39,14 +39,14 @@ body {
 }
 
 .column:hover {
-    background-color: #696969;
+    background-color: darkgrey;
     border-radius: 4px;
 }
 
 .square {
     height: 50px;
     width: 50px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 3px;
 }
 
@@ -56,11 +56,6 @@ body {
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.sqrbck:hover {
-    background-color: #474747;
-    border-radius: 4px;
 }
 
 .info {
@@ -106,6 +101,6 @@ body {
 }
 
 .home_btn:hover {
-    background-color: #474747;
+    background-color: darkgrey;
     border-radius: 4px;
 }

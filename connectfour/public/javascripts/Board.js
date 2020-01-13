@@ -4,24 +4,31 @@ function Board() {
     this.player2 = 2;
 
     this.board = [
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0]
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0]
     ]
 
     this.place = function(col, player) {
-        if (!this.checkcol) {
+        if (this.checkcol(col)) {
             return;
         }
 
         for (let i = 0; i < 6; i++) {
             if (this.board[col][i] == this.empty) {
-                this.board[col][i+1] = player;
+                this.board[col][i] = player;
+
+                var square = document.getElementById("c"+col).children[5-i].children[0];
+                square.style.backgroundColor = "yellow";
+                
+                break;
             }
         }
+
     };
 
     this.checkcol = function(col) {
@@ -32,27 +39,14 @@ function Board() {
         }
     };
 
-    document.getElementById("c1").onclick = function() {
-        console.log("clicked 1");
-    };
-    document.getElementById("c2").onclick = function() {
-        console.log("clicked 2");
-    };
-    document.getElementById("c3").onclick = function() {
-        console.log("clicked 3");
-    };
-    document.getElementById("c4").onclick = function() {
-        console.log("clicked 4");
-    };
-    document.getElementById("c5").onclick = function() {
-        console.log("clicked 5");
-    };
-    document.getElementById("c6").onclick = function() {
-        console.log("clicked 6");
-    };
-    document.getElementById("c7").onclick = function() {
-        console.log("clicked 7");
-    };
+    var that = this;
+
+    for (let i = 0; i < 7; i++) {
+        document.getElementById("c"+i).onclick = function() {
+            that.place(i, 1);
+        };
+    }
+
 }
 
-let b1 = new Board();
+let b = new Board();
