@@ -24,6 +24,10 @@ router.get("/home", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/newgame", (req, res) => {
+  res.render("waiting");
+});
+
 router.get("/clicked/:col", (req, res) => {
   // TODO
 });

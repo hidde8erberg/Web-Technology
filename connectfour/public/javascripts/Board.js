@@ -1,7 +1,4 @@
 function Board() {
-    this.empty = 0; // 0 will indicate that the space is not occupied
-    this.player1 = 1;
-    this.player2 = 2;
 
     this.board = [
         [0,0,0,0,0,0],
