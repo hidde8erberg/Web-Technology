@@ -77,7 +77,7 @@ body {
     margin-right: 10px;
 }
 
-.info p {
+.info #you {
     margin-top: 10px;
     font-family: 'Rift Soft', sans-serif;
     font-size: 30pt;
@@ -85,6 +85,17 @@ body {
     margin-bottom: 0px;
     margin-left: 9px;
     float: left;
+}
+
+.info #time {
+    margin-top: 10px;
+    font-family: 'Rift Soft', sans-serif;
+    font-size: 30pt;
+    color: white;
+    margin-bottom: 0px;
+    margin-left: 200px;
+    float: left;
+    padding-right: 10px;
 }
 
 .home_btn {

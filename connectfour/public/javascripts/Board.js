@@ -3,12 +3,14 @@ function Board() {
     this.player1 = 1;
     this.player2 = 2;
 
-    this.board = new Array();
-    for (let i = 0; i < 7; i++) {
-        for (let j = 0; j < 6; j++) {
-            this.board[i][j] = this.empty;
-        }
-    }
+    this.board = [
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0]
+    ]
 
     this.place = function(col, player) {
         if (!this.checkcol) {
@@ -30,26 +32,26 @@ function Board() {
         }
     };
 
-    this.document.getElementById("c1").onclick = function() {
-        console.log("clicked");
+    document.getElementById("c1").onclick = function() {
+        console.log("clicked 1");
     };
     document.getElementById("c2").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 2");
     };
     document.getElementById("c3").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 3");
     };
     document.getElementById("c4").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 4");
     };
     document.getElementById("c5").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 5");
     };
     document.getElementById("c6").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 6");
     };
     document.getElementById("c7").onclick = function() {
-        console.log("clicked");
+        console.log("clicked 7");
     };
 }
 
