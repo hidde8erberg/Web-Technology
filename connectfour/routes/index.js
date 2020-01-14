@@ -16,10 +16,6 @@ router.get("/play", (req, res) => {
   res.render("game");
 });
 
-router.get("/waiting", (req, res) => {
-  res.render("waiting");
-});
-
 router.get("/home", (req, res) => {
   res.redirect("/");
 });
