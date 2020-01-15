@@ -24,8 +24,4 @@ router.get("/newgame", (req, res) => {
   res.render("waiting");
 });
 
-router.get("/clicked/:col", (req, res) => {
-  // TODO
-});
-
 module.exports = router;
