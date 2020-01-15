@@ -20,7 +20,8 @@ var server = http.createServer(app);
 // WebSocket interaction
 const wss = new websocket.Server({ server });
 
-let connections = [];
+let waiting = [];
+let games = [];
 
 wss.on("connection", function(ws) {
 
