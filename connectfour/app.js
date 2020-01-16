@@ -22,6 +22,7 @@ var server = http.createServer(app);
 const wss = new websocket.Server({ server });
 
 var connections = new Map();
+var waiting = [];
 var games = new Map();
 
 wss.on("connection", function(ws, req) {
@@ -31,7 +32,18 @@ wss.on("connection", function(ws, req) {
   var params = req.url.split('?')[1].split('&')[0].split('=');
   var uid = authUser(params, ws);
 
+  if(connections.get(uid).waiting) {
+    if(waiting.length > 0) {
+      var opp = waiting[0];
+      startGame([opp, uid]);
+
+    } else {
+      waiting.push(uid);
+    }
+  } // Optional TODO: Implement redirect to game if user left page
+
   ws.on("message", function incoming(message) {
+    console.log(message, uid);
   });
 
 });
@@ -42,11 +54,22 @@ function authUser(params, ws) {
   if(params[0] == "cookie" && connections.has(params[1])) {
     uid = params[1];
   } else {
-    uid = Math.random().toString(36).substring(8);
+    uid = Math.random().toString(36).substring(5);
     ws.send( JSON.stringify(['cookie', uid]) );
     connections.set(uid, new User(ws));
   }
   return uid;
+}
+
+function startGame(players) {
+  let gameid = Math.random().toString(36).substring(7);
+  waiting.shift();
+  games.set(gameid, new Game(players[0], players[1]));
+  for(let i=0;i<2;i++) {
+    connections.get(players[i]).waiting = false;
+    connections.get(players[i]).gameid = gameid;
+    connections.get(players[i]).connection.send(JSON.stringify(['start']));
+  }
 }
 
 server.listen(port);

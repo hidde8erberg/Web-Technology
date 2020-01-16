@@ -1,6 +1,6 @@
 var Game = function(playerOne, playerTwo) {
-    this.playerOne = null;
-    this.playerTwo = null;
+    this.playerOne = playerOne;
+    this.playerTwo = playerTwo;
     this.turn = 1; // player one starts
     this.finished = false;
 }
