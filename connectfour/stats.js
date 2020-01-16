@@ -1,7 +1,7 @@
 let stats = {
-    playersOnline: 1,
-    currentMatches: 2,
-    totalMatches: 3
+    nPlayers: 1,
+    nGames: 2,
+    totalGames: 3
 };
 
 module.exports = stats;

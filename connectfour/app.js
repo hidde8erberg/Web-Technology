@@ -3,6 +3,7 @@ var websocket = require("ws");
 var http = require("http");
 var path = require('path');
 var Game = require("./game.js");
+var stats = require("./stats.js");
 
 var port = process.argv[2];
 var app = express();
@@ -31,12 +32,14 @@ let gameIdCounter = 0;
 wss.on("connection", function(ws) {
 
   ws.on("message", function incoming(msg) {
-    console.log(msg);
+    //console.log(msg);
     if (msg == "waiting") { 
       waiting.push(ws);
       if (waiting.length != 0 && waiting.length % 2 == 0) { newGame(); }
     }
-    if (msg == "starting") {  }
+    if (msg == "starting") { 
+      
+    }
   });
 
 });
