@@ -1,7 +1,7 @@
-var Game = function(gameID) {
-    this.playerOne = null;
-    this.playerTwo = null; 
-    this.id = gameID;
+var Game = function(wsOne, wsTwo, id) {
+    this.playerOne = wsOne;
+    this.playerTwo = wsTwo; 
+    this.id = id;
     this.turn = 1; // player one starts
     this.finished = false;
 }
