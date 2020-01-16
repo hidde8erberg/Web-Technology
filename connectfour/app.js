@@ -50,10 +50,11 @@ wss.on("connection", function(ws, req) {
   ws.on("message", function incoming(message) {
       var data = JSON.parse(message);
       if(connections.get(uid).turn && data[0] == 'place' && gameid != "none" && data[1] >= 0 && data[1] <= 6) {
-        games.get(gameid).place(data[1]);
-        connections.get(uid).turn = false;
-        connections.get(opp).turn = true;
-        connections.get(opp).connection.send(JSON.stringify(['move', data[1]]));
+        if(games.get(gameid).place(data[1])) {
+          connections.get(uid).turn = false;
+          connections.get(opp).turn = true;
+          connections.get(opp).connection.send(JSON.stringify(['move', data[1]]));
+        }
       }
   });
 });
