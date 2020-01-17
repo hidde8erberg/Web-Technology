@@ -35,7 +35,7 @@ wss.on("connection", function(ws, req) {
   var opp = "";
 
   if(connections.get(uid).waiting) { // Waiting page
-    if(waiting.length > 0) {
+    if(waiting.length > 0 && waiting[0] != uid) {
       opp = waiting[0];
       startGame([opp, uid]);
 
