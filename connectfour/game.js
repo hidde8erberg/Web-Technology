@@ -35,4 +35,37 @@ Game.prototype.place = function(col) {
 
 };
 
+Game.prototype.checkWin = function(col, row, player) {
+    var count = 0;
+    // Vertical
+    for(let i=0;i<6;i++) {
+        if(this.board[col][i] == player) {
+            count++;
+            if(count >= 4) {
+                // Win function
+                return;
+            }
+        } else {
+            count = 0;
+        }
+    }
+    count = 0;
+
+    // Horizontal
+    for(let i=0;i<7;i++) {
+        if(this.board[i][row] == player) {
+            count++;
+            if(count >= 4) {
+                // Win function
+                return;
+            }
+        } else {
+            count = 0;
+        }
+    }
+    count = 0;
+
+
+}
+
 module.exports = Game;
