@@ -71,7 +71,7 @@ Game.prototype.checkWin = function(col, row, player) {
     // Left-right bottom top diagonal check
     var tempRow = (row >= col ? row-col : 0);
     var tempCol = (row >= col ? 0 : col-row);
-    while(tempRow > 5 || tempCol > 6) {
+    while(tempRow <= 5 && tempCol <= 6) {
         if(this.board[tempCol][tempRow] == player) {
             count++;
             if(count >= 4) {
@@ -88,9 +88,8 @@ Game.prototype.checkWin = function(col, row, player) {
     count = 0;
 
     // Left-right top bottom diagonal check
-    // NOT WORKING YET
-    var tempRow = (row + col > 6 ? 6 : row + col);
-    var tempCol = (row + col > 6 ? col+(6-row) : 0);
+    tempRow = (row + col > 5 ? 5 : row + col);
+    tempCol = (row + col > 6 ? col+(6-row) : 0);
     while(tempRow >= 0 && tempCol <= 6) {
         if(this.board[tempCol][tempRow] == player) {
             count++;
