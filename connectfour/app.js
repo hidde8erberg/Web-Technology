@@ -45,25 +45,44 @@ wss.on("connection", function(ws, req) {
   if(connections.get(uid).waiting) { // Waiting page
     if(waiting.length > 0 && waiting[0] != uid) {
       opp = waiting[0];
+      connections.get(uid).redirected = true;
       startGame([opp, uid]);
 
     } else {
+      connections.get(uid).redirected = true;
       waiting.push(uid);
     }
   } else { // Game page
+    connections.get(uid).redirected = false;
     ws.send(JSON.stringify(['turn', connections.get(uid).turn]));
     opp = (uid == games.get(gameid).playerOne ? games.get(gameid).playerTwo : games.get(gameid).playerOne);
-  } // Optional TODO: Implement redirect to game if user left page
+  }
 
   ws.on("message", function incoming(message) {
       var data = JSON.parse(message);
-      if(connections.get(uid).turn && data[0] == 'place' && gameid != "none" && data[1] >= 0 && data[1] <= 6) {
+      if(connections.get(uid).turn && data[0] == 'place' && gameid != "none" && games.has(gameid) && data[1] >= 0 && data[1] <= 6) {
         if(games.get(gameid).place(data[1])) {
-          connections.get(uid).turn = false;
-          connections.get(opp).turn = true;
           connections.get(opp).connection.send(JSON.stringify(['move', data[1]]));
+          if(games.get(gameid).winner != null) {
+            connections.get(uid).connection.send(JSON.stringify(['ywin']));
+            connections.get(opp).connection.send(JSON.stringify(['ylose']));
+            connections.get(uid).turn = false;
+          } else {
+            connections.get(uid).turn = false;
+            connections.get(opp).turn = true;
+          }
         }
       }
+  });
+
+  ws.on("close", function close() {
+    if(!connections.get(uid).redirected) {
+      if(connections.has(opp) && games.get(gameid).winner != null) {
+        connections.get(opp).connection.send(JSON.stringify(['left']));
+      }
+      games.delete(gameid);
+      connections.delete(uid);
+    }
   });
 });
 

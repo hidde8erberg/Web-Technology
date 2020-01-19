@@ -16,6 +16,14 @@ ws.onmessage = function(message) {
         b.startTurn();
     } else if(type == 'move') {
         b.place(data[1], 2);
+    } else if(type == 'left') {
+        document.body.innerHTML = "<h1>Your opponent left the game</h1>" + document.body.innerHTML;
+    } else if(type == 'ywin') {
+        document.body.innerHTML = "<h1>YOU WON THE GAME</h1>" + document.body.innerHTML;
+        b.turn = false;
+    } else if(type == 'ylose') {
+        document.body.innerHTML = "<h1>You lost the game..</h1>" + document.body.innerHTML;
+        b.turn = false;
     }
 
 }

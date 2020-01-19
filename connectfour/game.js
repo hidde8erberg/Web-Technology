@@ -3,6 +3,7 @@ var Game = function(playerOne, playerTwo) {
     this.playerTwo = playerTwo;
     this.turn = playerOne; // player one starts
     this.finished = false;
+    this.winner = null;
 }
 
 Game.prototype.board = [
@@ -43,7 +44,7 @@ Game.prototype.checkWin = function(col, row, player) {
             count++;
             if(count >= 4) {
                 console.log('Vertical win');
-                // Win function
+                this.winner = this.turn;
                 return;
             }
         } else {
@@ -58,7 +59,7 @@ Game.prototype.checkWin = function(col, row, player) {
             count++;
             if(count >= 4) {
                 console.log('Horizontal win');
-                // Win function
+                this.winner = this.turn;
                 return;
             }
         } else {
@@ -75,7 +76,7 @@ Game.prototype.checkWin = function(col, row, player) {
             count++;
             if(count >= 4) {
                 console.log('bottom top diagonal win');
-                // Win function
+                this.winner = this.turn;
                 return;
             }
         } else {
@@ -94,7 +95,7 @@ Game.prototype.checkWin = function(col, row, player) {
             count++;
             if(count >= 4) {
                 console.log('top bottom diagonal win');
-                // Win function
+                this.winner = this.turn;
                 return;
             }
         } else {
