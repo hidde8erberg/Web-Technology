@@ -11,7 +11,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+var connections = new Map();
+var waiting = [];
+var games = new Map();
+var gameCount = 0;
+
 var indexRouter = require('./routes/index');
+indexRouter.get("/", (req, res) => {
+  res.render("splash", {
+    players: connections.size,
+    ongoing: games.size,
+    total: gameCount
+  });
+});
 app.use('/', indexRouter);
 
 app.use(express.static(__dirname + "/public"));
@@ -21,13 +33,9 @@ var server = http.createServer(app);
 // WebSocket interaction
 const wss = new websocket.Server({ server });
 
-var connections = new Map();
-var waiting = [];
-var games = new Map();
-
 wss.on("connection", function(ws, req) {
   console.log("Connected!");
-
+  indexRouter.players = connections.size;
   //Get possible cookie parameter from user
   var params = req.url.split('?')[1].split('&')[0].split('=');
   var uid = authUser(params, ws);
@@ -75,6 +83,7 @@ function authUser(params, ws) {
 
 function startGame(players) {
   let gameid = Math.random().toString(36).substring(7);
+  gameCount++;
   waiting.shift();
   games.set(gameid, new Game(players[0], players[1]));
   for(let i=0;i<2;i++) {
