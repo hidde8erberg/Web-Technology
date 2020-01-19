@@ -29,7 +29,6 @@ Game.prototype.place = function(col) {
             this.checkWin(col, i, currentPlayer);
             this.turn = (currentPlayer == 2 ? this.playerOne : this.playerTwo);
             return true;
-            break;
         }
     }
     return false;
@@ -104,8 +103,6 @@ Game.prototype.checkWin = function(col, row, player) {
         tempRow--;
         tempCol++;
     }
-    count = 0;
-    console.log('failure');
 }
 
 module.exports = Game;
