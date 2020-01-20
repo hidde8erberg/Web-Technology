@@ -70,6 +70,8 @@ wss.on("connection", function(ws, req) {
           } else {
             connections.get(uid).turn = false;
             connections.get(opp).turn = true;
+            connections.get(uid).connection.send(JSON.stringify(['turn', false]));
+            connections.get(opp).connection.send(JSON.stringify(['turn', true]));
           }
         }
       }
