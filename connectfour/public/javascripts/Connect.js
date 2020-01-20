@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:3000/?cookie=" + getCookie("uid-cnnctfr"));
+var ws = new WebSocket("ws://"+window.location.host +"/?cookie=" + getCookie("uid-cnnctfr"));
 
 ws.onopen = function() {
 }
@@ -13,20 +13,18 @@ ws.onmessage = function(message) {
         window.location.href = 'play';
     } else if(type == 'turn') {
         (value ? b.turn = true : "");
-        document.getElementById("you").innerHTML = (value ? "YOUR TURN" : "OPPONENT'S TURN");
+        document.getElementById("you").innerHTML = (b.turn ? "YOUR TURN" : "OPPONENT'S TURN");
         b.startTurn();
     } else if(type == 'move') {
         b.place(data[1], 2);
+        document.getElementById("you").innerHTML = "YOUR TURN";
     } else if(type == 'left') {
-        //document.body.innerHTML = "<h1>Your opponent left the game</h1>" + document.body.innerHTML;
         alert("Your opponent left the game");
     } else if(type == 'ywin') {
         document.getElementById("you").innerHTML = "YOU WON!";
-        //document.body.innerHTML = "<h1>YOU WON THE GAME</h1>" + document.body.innerHTML;
         b.turn = false;
     } else if(type == 'ylose') {
         document.getElementById("you").innerHTML = "YOU LOST!";
-        //document.body.innerHTML = "<h1>You lost the game..</h1>" + document.body.innerHTML;
         b.turn = false;
     }
 

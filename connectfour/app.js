@@ -34,7 +34,6 @@ var server = http.createServer(app);
 const wss = new websocket.Server({ server });
 
 wss.on("connection", function(ws, req) {
-  console.log("Connected!");
 
   //Get possible cookie parameter from user
   var params = req.url.split('?')[1].split('&')[0].split('=');
@@ -61,7 +60,7 @@ wss.on("connection", function(ws, req) {
   ws.on("message", function incoming(message) {
       var data = JSON.parse(message);
       if(connections.get(uid).turn && data[0] == 'place' && gameid != "none" && games.has(gameid) && data[1] >= 0 && data[1] <= 6) {
-        if(games.get(gameid).place(data[1])) { // Place and check for illgeal move
+        if(games.get(gameid).place(data[1])) { // Place and check for illegal move
           connections.get(opp).connection.send(JSON.stringify(['move', data[1]]));
           if(games.get(gameid).winner != null) {
             connections.get(uid).connection.send(JSON.stringify(['ywin']));
@@ -70,8 +69,6 @@ wss.on("connection", function(ws, req) {
           } else {
             connections.get(uid).turn = false;
             connections.get(opp).turn = true;
-            connections.get(uid).connection.send(JSON.stringify(['turn', false]));
-            connections.get(opp).connection.send(JSON.stringify(['turn', true]));
           }
         }
       }

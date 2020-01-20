@@ -22,6 +22,7 @@ function Board() {
                 var square = document.getElementById("c"+col).children[5-i].children[0];
                 if (player == 1) {
                     ws.send(JSON.stringify(['place', col]) );
+                    document.getElementById("you").innerHTML = "OPPONENT'S TURN";
                     square.style.backgroundColor = "yellow";
                     this.turn = false;
                 } else {

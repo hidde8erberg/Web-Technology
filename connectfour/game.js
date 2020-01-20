@@ -4,29 +4,29 @@ var Game = function(playerOne, playerTwo) {
     this.turn = playerOne; // player one starts
     this.finished = false;
     this.winner = null;
+    this.board = [
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0],
+        [0,0,0,0,0,0]
+    ];
 }
-
-Game.prototype.board = [
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0],
-    [0,0,0,0,0,0]
-];
 
 Game.prototype.place = function(col) {
 
     // check if column is full
-    if (Game.prototype.board[col][5] != 0) {
+    if (this.board[col][5] != 0) {
+        console.log(this.board);
         return false;
     }
 
     let currentPlayer = (this.turn == this.playerOne ? 1 : 2);
     for (let i = 0; i < 6; i++) {
-        if (Game.prototype.board[col][i] == 0) {
-            Game.prototype.board[col][i] = currentPlayer;
+        if (this.board[col][i] == 0) {
+            this.board[col][i] = currentPlayer;
             this.checkWin(col, i, currentPlayer);
             this.turn = (currentPlayer == 2 ? this.playerOne : this.playerTwo);
             return true;
