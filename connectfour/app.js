@@ -35,7 +35,7 @@ const wss = new websocket.Server({ server });
 
 wss.on("connection", function(ws, req) {
   console.log("Connected!");
-  indexRouter.players = connections.size;
+
   //Get possible cookie parameter from user
   var params = req.url.split('?')[1].split('&')[0].split('=');
   var uid = authUser(params, ws);
@@ -46,10 +46,10 @@ wss.on("connection", function(ws, req) {
     if(waiting.length > 0 && waiting[0] != uid) {
       opp = waiting[0];
       connections.get(uid).redirected = true;
+      connections.get(opp).redirected = true;
       startGame([opp, uid]);
 
     } else {
-      connections.get(uid).redirected = true;
       waiting.push(uid);
     }
   } else { // Game page
@@ -61,7 +61,7 @@ wss.on("connection", function(ws, req) {
   ws.on("message", function incoming(message) {
       var data = JSON.parse(message);
       if(connections.get(uid).turn && data[0] == 'place' && gameid != "none" && games.has(gameid) && data[1] >= 0 && data[1] <= 6) {
-        if(games.get(gameid).place(data[1])) {
+        if(games.get(gameid).place(data[1])) { // Place and check for illgeal move
           connections.get(opp).connection.send(JSON.stringify(['move', data[1]]));
           if(games.get(gameid).winner != null) {
             connections.get(uid).connection.send(JSON.stringify(['ywin']));
@@ -77,8 +77,11 @@ wss.on("connection", function(ws, req) {
 
   ws.on("close", function close() {
     if(!connections.get(uid).redirected) {
-      if(connections.has(opp) && games.get(gameid).winner != null) {
+      if(connections.has(opp)) {
         connections.get(opp).connection.send(JSON.stringify(['left']));
+      }
+      if(connections.get(uid).waiting) {
+        waiting.shift();
       }
       games.delete(gameid);
       connections.delete(uid);
@@ -86,7 +89,6 @@ wss.on("connection", function(ws, req) {
   });
 });
 
-// Perhaps this in another file but wasn't sure how to use the connections Map than.
 function authUser(params, ws) {
   let uid = "";
   if(params[0] == "cookie" && connections.has(params[1])) {
