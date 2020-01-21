@@ -4,4 +4,4 @@ All messages:
 - Game won by
 - Move in row 
 - Opponent left
-- ...
+- Players turn
