@@ -58,5 +58,5 @@ function Board() {
     }
 
 }
-
+document.body.innerHTML += "<audio style='display:none;' id='soundfx' src='/sounds/basss.mp3'></audio>";
 let b = new Board();

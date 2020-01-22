@@ -17,6 +17,7 @@ ws.onmessage = function(message) {
         b.startTurn();
     } else if(type == 'move') {
         b.place(data[1], 2);
+        document.getElementById("soundfx").play();
         document.getElementById("you").innerHTML = "YOUR TURN";
     } else if(type == 'left') {
         alert("Your opponent left the game");
